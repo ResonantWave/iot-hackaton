@@ -1,0 +1,39 @@
+esphome:
+  name: <titulo>
+  platform: ESP8266
+  board: esp01_1m
+
+wifi:
+  ssid: "AmigusLabs_Openor"
+  password: "Amigus_Openor"
+
+captive_portal:
+
+logger:
+
+api:
+  password: "<contraseñachula>"
+
+ota:
+  password: "<contraseñachula>"
+
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: GPIO0
+      mode: INPUT_PULLUP
+      inverted: True
+    name: "<Interruptor físico>"
+    on_press:
+      - switch.toggle: relay
+
+switch:
+  - platform: gpio
+    name: "<Relé>"
+    pin: GPIO12
+    id: relay
+
+status_led:
+  pin:
+    number: GPIO13
+    inverted: yes
