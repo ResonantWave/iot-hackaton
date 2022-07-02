@@ -1,0 +1,53 @@
+esphome:
+  name: co2-sensor
+
+esp8266:
+  board: nodemcuv2
+  framework:
+    version: 2.7.4
+
+wifi:
+  ssid: "A Industriosa"
+  password: "alfageme"
+
+logger:
+
+api:
+  password: "hackaton"
+
+ota:
+  password: "hackaton"
+  
+i2c:
+
+output:
+  - platform: gpio
+    pin: D8
+    id: buzzer
+    
+switch:
+  - platform: output
+    name: "Buzzer"
+    output: 'buzzer'
+
+light:
+  - platform: fastled_clockless
+    chipset: NEOPIXEL
+    pin: D6
+    num_leds: 1
+    name: "CO2 sensor LED"
+
+sensor:
+  - platform: scd30
+    co2:
+      name: "CO2"
+      accuracy_decimals: 1
+    temperature:
+      name: "Temperatura"
+      accuracy_decimals: 2
+    humidity:
+      name: "Humedad"
+      accuracy_decimals: 1
+    temperature_offset: 1.5 °C
+    address: 0x61
+    update_interval: 5s
